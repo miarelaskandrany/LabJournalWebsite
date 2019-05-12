@@ -1,0 +1,50 @@
+---
+title: "Snakes and Ladders"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Snakes and Ladders Problem 
+
+```{r}
+
+
+no_change <- c(2,4,5,8,7,11,12,13,15,16,17,18,20,21,23,25)
+save_rolls<-c()
+for(sims in 1:1000){
+number_of_rolls <- 0
+board_position <- 1
+while (board_position < 25){
+ number_of_rolls <- number_of_rolls+1
+ roll <- sample(c(1,2,3,4,5,6),1)
+ 
+ # go to new board position
+ board_position <- board_position+roll
+
+ # check if we need to update board position
+ 
+ # go up if ladder
+ if (board_position ==3) board_position <- 11
+ if (board_position ==6) board_position <- 17 
+ if (board_position == 9) board_position <- 18 
+ if (board_position ==10) board_position <- 12 
+ 
+ # go down if snake
+ if (board_position ==14) board_position <- 4
+ if (board_position ==19) board_position <- 8
+ if (board_position ==22) board_position <- 20
+ if (board_position ==24) board_position <- 16
+ 
+ #print(c(number_of_rolls,roll,board_position))}
+}
+
+save_rolls[sims] <- number_of_rolls
+}
+mean(save_rolls)
+
+
+
+```

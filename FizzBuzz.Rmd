@@ -1,0 +1,16 @@
+---
+title: "FizzBuzz"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+FizzBuzz Problem 
+```{r}
+fizzbuzz <- 1:100
+fizzbuzz3 <- ifelse (fizzbuzz %% 3 == 0,"fizz",fizzbuzz)
+fizzbuzz5 <- ifelse (fizzbuzz %% 5 == 0,"buzz",fizzbuzz3)
+ifelse (fizzbuzz %% 5 == 0 & fizzbuzz %% 3 == 0,"fizzbuzz",fizzbuzz5)
+```
