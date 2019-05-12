@@ -1,6 +1,6 @@
-name: "MyLabJournal"
+name: "HonorsAssignment"
 navbar:
-  title: "MyLabJournal"
+  title: "HonorsAssignment"
   left:
     - text: "Home"
       href: index.html
@@ -8,6 +8,8 @@ navbar:
       href: FizzBuzz.html
     - text: "Snakes and Ladders"
       href: SnakesandLadders.html
-    - text: "Statistical Analysis"
-      href: StatisticalAnalysis.html
+    - text: "Summary of Paper"
+      href: Summary.html
+    - text: "E1 Analysis"
+      href: E1_Analysis.html
 output_dir: "docs"
