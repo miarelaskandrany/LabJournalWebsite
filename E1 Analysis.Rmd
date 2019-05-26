@@ -101,22 +101,22 @@ library(ggplot2)
 all_data$Condition <- c(stimpos==cue)
 
 
-subject_means <- all_data %>%
-                 filter(Crit, KI, Ans<5) %>%
-                 group_by(KI, Condition) %>%
-                 summarise(mean_ans = mean(Ans))
+#subject_means <- all_data %>%
+                 #filter(Crit, KI, Ans<5) %>%
+                 #group_by(KI, Condition) %>%
+                 #summarise(mean_ans = mean(Ans))
 
 # Make sure IV and Subject are coded as factors
-subject_means$Subject  <- as.factor(subject_means$KI)
-subject_means$Stimulus <- as.factor(subject_means$Condition)
+#subject_means$Subject  <- as.factor(subject_means$KI)
+#subject_means$Stimulus <- as.factor(subject_means$Condition)
 
 # Conduct the anova
 
-aov_out <- aov( mean_ans ~ Stimulus + Error(Subject/Stimulus), subject_means)
-summary_out <- summary(aov_out)
+#aov_out <- aov( mean_ans ~ Stimulus + Error(Subject/Stimulus), subject_means)
+#summary_out <- summary(aov_out)
 
-library(xtable)
-knitr::kable(xtable(summary_out))
+#library(xtable)
+#knitr::kable(xtable(summary_out))
 ```
 
 
