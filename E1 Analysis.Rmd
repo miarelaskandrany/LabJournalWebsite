@@ -32,7 +32,6 @@ for(i in file_names){
 ```
 
 ```{r}
-# extracting certain columns from dataset and placing them into variables
 KI<- all_data$KI
 cue<- all_data$Cue
 stimpos<- all_data$StimPos
@@ -44,6 +43,7 @@ part1<-data.frame(KI,cue,stimpos,ans,correct)
 part1a <- data.frame(part1$KI, part1$cue, part1$stimpos)
 part1b<-data.frame(data.matrix(part1,rownames.force = NA))
 
+library(dplyr)
 #filtering out only certain columns from the dataset (valid)
 KI1_valid <- all_data %>% filter(Cue == StimPos)%>% filter (KI ==1 )
 KI3_valid <- all_data %>% filter(Cue == StimPos) %>%filter (KI ==3 )
