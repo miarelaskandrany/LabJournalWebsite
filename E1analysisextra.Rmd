@@ -1,0 +1,202 @@
+---
+title: "E1analysisextra"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+KI1<-data.frame(all_data[1:320,1],all_data[1:320,12],all_data[1:320,13] )
+KI1mean<-mean(KI1$Ans)
+KI1mean2<-mean(KI1$Correct, na.rm =TRUE)
+
+KI3<-data.frame(all_data[321:640,1],all_data[321:640,12],all_data[321:640,13] )
+KI3mean<-mean(KI3$Ans)
+KI3mean2<-mean(KI3$Correct, na.rm =TRUE)
+
+KI4<-data.frame(all_data[641:960,1],all_data[641:960,12],all_data[641:960,13] )
+KI4mean<-mean(KI4$Ans)
+KI4mean2<-mean(KI4$Correct, na.rm =TRUE)
+
+KI5<-data.frame(all_data[961:1280,1],all_data[961:1280,12],all_data[961:1280,13] )
+KI5mean<-mean(KI5$Ans)
+KI5mean2<-mean(KI5$Correct, na.rm =TRUE)
+
+KI6<-data.frame(all_data[1281:1600,1],all_data[1281:1600,12],all_data[1281:1600,13] )
+KI6mean<-mean(KI6$Ans)
+KI6mean2<-mean(KI6$Correct, na.rm =TRUE)
+
+KI7<-data.frame(all_data[1601:1920,1],all_data[1601:1920,12],all_data[1601:1920,13] )
+KI7mean<-mean(KI7$Ans)
+KI7mean2<-mean(KI7$Correct, na.rm =TRUE)
+
+KI9<-data.frame(all_data[1921:2240,1],all_data[1921:2240,12],all_data[1921:2240,13] )
+KI9mean<-mean(KI9$Ans)
+KI9mean2<-mean(KI9$Correct, na.rm =TRUE)
+
+KI10<-data.frame(all_data[2241:2560,1],all_data[2241:2560,12],all_data[2241:2560,13] )
+KI10mean<-mean(KI10$Ans)
+KI10mean2<-mean(KI10$Correct, na.rm =TRUE)
+
+KI11<-data.frame(all_data[2561:2880,1],all_data[2561:2880,12],all_data[2561:2880,13] )
+KI11mean<-mean(KI11$Ans)
+KI11mean2<-mean(KI11$Correct, na.rm =TRUE)
+
+KI12<-data.frame(all_data[2881:3200,1],all_data[2881:3200,12],all_data[2881:3200,13] )
+KI12mean<-mean(KI12$Ans)
+KI12mean2<-mean(KI12$Correct, na.rm =TRUE)
+
+KI13<-data.frame(all_data[3201:3520,1],all_data[3201:3520,12],all_data[3201:3520,13] )
+KI13mean<-mean(KI13$Ans)
+KI13mean2<-mean(KI13$Correct, na.rm =TRUE)
+
+KI14<-data.frame(all_data[3521:3840,1],all_data[3521:3840,12],all_data[3521:3840,13] )
+KI14mean<-mean(KI14$Ans)
+KI14mean2<-mean(KI14$Correct, na.rm =TRUE)
+
+KI15<-data.frame(all_data[3841:4160,1],all_data[3841:4160,12],all_data[3841:4160,13] )
+KI15mean<-mean(KI15$Ans)
+KI15mean2<-mean(KI15$Correct, na.rm =TRUE)
+
+KI16<-data.frame(all_data[4161:4480,1],all_data[4161:4480,12],all_data[4161:4480,13] )
+KI16mean<-mean(KI16$Ans)
+KI16mean2<-mean(KI16$Correct, na.rm =TRUE)
+
+x <-data.frame("Ans Mean" = c(KI1mean,KI3mean,KI4mean,KI5mean,KI6mean,KI7mean,KI9mean,KI10mean,KI11mean,KI12mean,KI13mean,KI14mean,KI15mean,KI16mean),"Correct Mean" = c(KI1mean2,KI3mean2,KI4mean2,KI5mean2,KI6mean2,KI7mean2,KI9mean2,KI10mean2,KI11mean2,KI12mean2,KI13mean2,KI14mean2,KI15mean2,KI16mean2))
+
+t.test(x$Ans.Mean,x$Correct.Mean,paired=TRUE, var.equal = TRUE)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+```{r}
+# find the means for each subject and then make them into data t test between Ans and Correct 
+
+KI1<-data.frame(all_data[1:320,1],all_data[1:320,12],all_data[1:320,13] )
+KI1mean<-mean(KI1$Ans)
+KI1mean2<-mean(KI1$Correct, na.rm =TRUE)
+print (KI1mean2)
+
+KI3<-data.frame(all_data[321:640,1],all_data[321:640,12],all_data[321:640,13] )
+KI3mean<-mean(KI3$Ans)
+
+KI4<-data.frame(all_data[641:960,1],all_data[641:960,12],all_data[641:960,13] )
+KI4mean<-mean(KI4$Ans)
+
+KI5<-data.frame(all_data[961:1280,1],all_data[961:1280,12],all_data[961:1280,13] )
+KI5mean<-mean(KI5$Ans)
+
+KI6<-data.frame(all_data[1281:1600,1],all_data[1281:1600,12],all_data[1281:1600,13] )
+KI6mean<-mean(KI6$Ans)
+
+KI7<-data.frame(all_data[1601:1920,1],all_data[1601:1920,12],all_data[1601:1920,13] )
+KI7mean<-mean(KI7$Ans)
+
+KI9<-data.frame(all_data[1921:2240,1],all_data[1921:2240,12],all_data[1921:2240,13] )
+KI9mean<-mean(KI9$Ans)
+
+KI10<-data.frame(all_data[2241:2560,1],all_data[2241:2560,12],all_data[2241:2560,13] )
+KI10mean<-mean(KI10$Ans)
+
+KI11<-data.frame(all_data[2561:2880,1],all_data[2561:2880,12],all_data[2561:2880,13] )
+KI11mean<-mean(KI11$Ans)
+
+KI12<-data.frame(all_data[2881:3200,1],all_data[2881:3200,12],all_data[2881:3200,13] )
+KI12mean<-mean(KI12$Ans)
+
+KI13<-data.frame(all_data[3201:3520,1],all_data[3201:3520,12],all_data[3201:3520,13] )
+KI13mean<-mean(KI13$Ans)
+
+KI14<-data.frame(all_data[3521:3840,1],all_data[3521:3840,12],all_data[3521:3840,13] )
+KI14mean<-mean(KI14$Ans)
+
+KI15<-data.frame(all_data[3841:4160,1],all_data[3841:4160,12],all_data[3841:4160,13] )
+KI15mean<-mean(KI15$Ans)
+
+KI16<-data.frame(all_data[4161:4480,1],all_data[4161:4480,12],all_data[4161:4480,13] )
+KI16mean<-mean(KI16$Ans)
+
+data.frame(KI1mean,KI3mean,KI4mean,KI5mean,KI6mean,KI7mean,KI9mean,KI10mean,KI11mean,KI12mean,KI13mean,KI14mean,KI15mean,KI16mean)
+
+
+```
+
+
+
+
+```{r}
+# To first test whether our manipulation of spatial attention was effective, we analysed the effect of the cue on the accuracy in the main task. We found a significant difference in correct answers between the valid and invalid condition (t(13)=−3.96, p=.002, d=1.06; The average correct response in the valid condition was 77.71% and in the invalid condition 62.65%).
+
+#creating a new data frame with select columns 
+KI<- all_data$KI
+cue<- all_data$Cue
+stimpos<- all_data$StimPos
+ans<- all_data$Ans
+correct<- all_data$Correct
+part1<-data.frame(KI,cue,stimpos,ans,correct)
+part1x<-(data.frame(part1x<-data.matrix(part1,rownames.force = NA)))
+cue1<-part1x$cue
+stimpos1<-part1x$stimpos
+ans1<- part1x$StimPos
+correct1<-part1x$StimPos
+
+t.test(all_data$Ans,all_data$Correct, paired= TRUE, var.equal=TRUE)
+mean(Ans)
+
+valid<-data.frame()
+for (i in 1:col(part1x)){ 
+if(cue1[i]==stimpos1[i]) valid[i]=data.frame(ans1,correct1)
+else 
+z[i]=c("NA") 
+} 
+
+
+
+# t test for valid and invalid condition - correct answers 
+x<-length (cue1 == stimpos1)
+for (x in 1:x){}
+```
+
+
+```{r}
+x<-length (cue1 == stimpos1)
+  if (cue1==stimpos1) {
+    
+  }
+
+for (KI in 1:x){
+  if (cue1==stimpos1){
+    valid<-data.frame(ans1,correct1)
+  }
+}
+```
+
+
+
+
+
+
+
+
+
+```{r}
+# converting string(?) data into numeric varaibles 
+cue1<-data.matrix(part1a,rownames.force = NA)
+stimpos1<-data.matrix(part1b,rownames.force = NA)
+col_t_paired(cue1, stimpos1, alternative = "two.sided", mu = 0.002)
+```
+
+
