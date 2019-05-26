@@ -44,6 +44,7 @@ part1a <- data.frame(part1$KI, part1$cue, part1$stimpos)
 part1b<-data.frame(data.matrix(part1,rownames.force = NA))
 
 library(dplyr)
+
 #filtering out only certain columns from the dataset (valid)
 KI1_valid <- all_data %>% filter(Cue == StimPos)%>% filter (KI ==1 )
 KI3_valid <- all_data %>% filter(Cue == StimPos) %>%filter (KI ==3 )
@@ -84,7 +85,7 @@ invalid <- c(mean(KI1_invalid$Ans),mean(KI3_invalid$Ans),mean(KI4_invalid$Ans),m
 
 
 # t test for correct answers between the valid and invalid conditions
-t.test(valid, invalid, var.equal = TRUE, paired = TRUE)
+#t.test(valid, invalid, var.equal = TRUE, paired = TRUE)
 
 ```
 
@@ -93,21 +94,15 @@ t.test(valid, invalid, var.equal = TRUE, paired = TRUE)
 #rmANOVA IV: Crit 1 or 0 IV: Valid or Invalid 
 # DV: Ans 1-4 
 
-#plot the data 
-hist(all_data$Ans)
-
-
 library(dplyr)
 library(ggplot2)
-```
 
-
-```{r}
 # get subject means
 all_data$Condition <- c(stimpos==cue)
 
+
 subject_means <- all_data %>%
-                 filter(Crit, Ans<5) %>%
+                 filter(Crit, KI, Ans<5) %>%
                  group_by(KI, Condition) %>%
                  summarise(mean_ans = mean(Ans))
 
