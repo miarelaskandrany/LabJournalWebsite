@@ -1,0 +1,134 @@
+---
+title: "E1 Analysis"
+author: 
+date: 
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Data:https://osf.io/scfvx/
+
+# load the data
+
+```{r}
+library(data.table)
+
+# load one file
+
+# temp <- fread(file="data/KI_03.dat")
+
+
+# load all files
+file_names <- list.files("data/")
+
+all_data <- data.frame()
+for(i in file_names){
+ temp_data <- fread(file=paste("data/",i,sep = ""))
+ all_data <- rbind(all_data, temp_data)
+}
+```
+
+```{r}
+# extracting certain columns from dataset and placing them into variables
+KI<- all_data$KI
+cue<- all_data$Cue
+stimpos<- all_data$StimPos
+ans<- all_data$Ans
+correct<- all_data$Correct
+
+#creating new data frames
+part1<-data.frame(KI,cue,stimpos,ans,correct)
+part1a <- data.frame(part1$KI, part1$cue, part1$stimpos)
+part1b<-data.frame(data.matrix(part1,rownames.force = NA))
+
+#filtering out only certain columns from the dataset (valid)
+KI1_valid <- all_data %>% filter(Cue == StimPos)%>% filter (KI ==1 )
+KI3_valid <- all_data %>% filter(Cue == StimPos) %>%filter (KI ==3 )
+KI4_valid <- all_data %>% filter(Cue == StimPos) %>% filter (KI ==4)
+KI5_valid <- all_data %>% filter(Cue == StimPos) %>% filter (KI ==5)
+KI6_valid <- all_data %>% filter(Cue == StimPos) %>% filter (KI ==6)
+KI7_valid <- all_data %>% filter(Cue == StimPos) %>% filter (KI ==7)
+KI9_valid <- all_data %>% filter(Cue == StimPos) %>% filter (KI ==9)
+KI10_valid <- all_data %>% filter(Cue == StimPos) %>% filter (KI ==10)
+KI11_valid <- all_data %>% filter(Cue == StimPos) %>% filter (KI ==11)
+KI12_valid <- all_data %>% filter(Cue == StimPos) %>% filter (KI ==12)
+KI13_valid <- all_data %>% filter(Cue == StimPos) %>% filter (KI ==13)
+KI14_valid <- all_data %>% filter(Cue == StimPos) %>% filter (KI ==14)
+KI15_valid <- all_data %>% filter(Cue == StimPos) %>% filter (KI ==15)
+KI16_valid <- all_data %>% filter(Cue == StimPos) %>% filter (KI ==16)
+
+#finding the mean Ans for each subject 
+valid <- c(mean(KI1_valid$Ans),mean(KI3_valid$Ans),mean(KI4_valid$Ans),mean(KI5_valid$Ans),mean(KI6_valid$Ans),mean(KI7_valid$Ans),mean(KI9_valid$Ans),mean(KI10_valid$Ans),mean(KI11_valid$Ans),mean(KI12_valid$Ans),mean(KI13_valid$Ans),mean(KI14_valid$Ans),mean(KI15_valid$Ans),mean(KI16_valid$Ans))
+
+#filtering out only certain columns from the dataset (invalid)
+KI1_invalid <- all_data %>% filter(Cue != StimPos) %>% filter (KI ==1 )
+KI3_invalid <- all_data %>% filter(Cue != StimPos) %>% filter (KI ==3 )
+KI4_invalid <- all_data %>% filter(Cue != StimPos) %>% filter (KI ==4)
+KI5_invalid <- all_data %>% filter(Cue != StimPos) %>% filter (KI ==5)
+KI6_invalid <- all_data %>% filter(Cue != StimPos) %>% filter (KI ==6)
+KI7_invalid <- all_data %>% filter(Cue != StimPos) %>%filter (KI ==7)
+KI9_invalid <- all_data %>% filter(Cue != StimPos) %>% filter (KI ==9)
+KI10_invalid <- all_data %>% filter(Cue != StimPos) %>% filter (KI ==10)
+KI11_invalid <- all_data %>% filter(Cue != StimPos) %>%  filter (KI ==11)
+KI12_invalid <- all_data %>% filter(Cue != StimPos) %>% filter (KI ==12)
+KI13_invalid <- all_data %>% filter(Cue != StimPos) %>% filter (KI ==13)
+KI14_invalid <- all_data %>% filter(Cue != StimPos) %>% filter (KI ==14)
+KI15_invalid <- all_data %>% filter(Cue != StimPos) %>% filter (KI ==15)
+KI16_invalid <- all_data %>% filter(Cue != StimPos) %>% filter (KI ==16)
+
+#finding the mean Ans for each subject 
+invalid <- c(mean(KI1_invalid$Ans),mean(KI3_invalid$Ans),mean(KI4_invalid$Ans),mean(KI5_invalid$Ans),mean(KI6_invalid$Ans),mean(KI7_invalid$Ans),mean(KI9_invalid$Ans),mean(KI10_invalid$Ans),mean(KI11_invalid$Ans),mean(KI12_invalid$Ans),mean(KI13_invalid$Ans),mean(KI14_invalid$Ans),mean(KI15_invalid$Ans),mean(KI16_invalid$Ans))
+
+
+# t test for correct answers between the valid and invalid conditions
+t.test(valid, invalid, var.equal = TRUE, paired = TRUE)
+
+```
+
+
+```{r}
+#rmANOVA IV: Crit 1 or 0 IV: Valid or Invalid 
+# DV: Ans 1-4 
+
+#plot the data 
+hist(all_data$Ans)
+
+
+library(dplyr)
+library(ggplot2)
+```
+
+
+```{r}
+# get subject means
+
+subject_means <- all_data %>%
+                 filter(Crit, Ans<5) %>%
+                 group_by(KI, Condition) %>%
+                 summarise(mean_ans = mean(Ans))
+
+# Make sure IV and Subject are coded as factors
+subject_means$Subject  <- as.factor(subject_means$KI)
+subject_means$Stimulus <- as.factor(subject_means$Condition)
+
+# Conduct the anova
+
+aov_out <- aov( mean_ans ~ Stimulus + Error(Subject/Stimulus), subject_means)
+summary_out <- summary(aov_out)
+
+library(xtable)
+knitr::kable(xtable(summary_out))
+```
+
+
+
+
+
+
+
+
+
+
